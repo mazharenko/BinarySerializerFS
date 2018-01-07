@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ConverterTests\Cases\UniversalConverterTestCase.fs" />
+    <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.fs" />
+    <Compile Include="ConverterTests\ConverterReadTests.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BinarySerializerFS\BinarySerializerFS.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FsUnit" Version="3.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="NUnit" Version="3.9.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.9.0" />
+  </ItemGroup>
+</Project>
