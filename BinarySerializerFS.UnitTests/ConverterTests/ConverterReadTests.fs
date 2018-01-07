@@ -20,6 +20,8 @@ let TestConverterRead (expected : obj) (source : byte []) (converter : IConverte
 
 [<Test>]
 [<TestCaseSource(typeof<BooleanConverterTestCaseSource>)>]
+[<TestCaseSource(typeof<StringConverterTestCaseSource>)>]
 let TestConvertersRead (expected : obj) (source : byte []) (``type`` : Type) = 
     let converter = Activator.CreateInstance ``type`` :?> IConverter
     TestConverterRead expected source converter
+    

@@ -5,7 +5,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ConverterTests\Cases\UniversalConverterTestCase.fs" />
+    <Compile Include="ConverterTests\CaseSources\BaseConverterTestCaseSource.fs" />
     <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.fs" />
+    <Compile Include="ConverterTests\CaseSources\StringConverterTestCaseSource.fs" />
     <Compile Include="ConverterTests\ConverterReadTests.fs" />
   </ItemGroup>
   <ItemGroup>

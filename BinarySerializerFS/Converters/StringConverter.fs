@@ -1,0 +1,25 @@
+namespace BinarySerializerFS.Converters
+
+open BinarySerializerFS.Converters.Base
+open System.Text
+
+type StringConverter() = 
+    class
+        inherit Converter<string>()
+        
+        override __.WriteInternal source stream = 
+            let sourceUntilZeroBytes = 
+                source
+                |> Seq.takeWhile (fun c -> c <> char 0)
+                |> Seq.toArray
+                |> string
+                |> Encoding.UTF8.GetBytes
+            stream.Write(sourceUntilZeroBytes, 0, sourceUntilZeroBytes.Length)
+            stream.WriteByte 0x00uy
+        
+        override __.ReadInternal stream = 
+            Seq.initInfinite (fun _ -> __.ReadBytesInternal stream 1 |> Seq.exactlyOne)
+            |> Seq.takeWhile (fun c -> c <> 0uy)
+            |> Seq.toArray
+            |> Encoding.UTF8.GetString
+    end

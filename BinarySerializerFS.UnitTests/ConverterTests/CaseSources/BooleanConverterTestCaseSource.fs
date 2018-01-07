@@ -6,15 +6,13 @@ open System.Collections
 
 type public BooleanConverterTestCaseSource() = 
     class
-        let Key = "Bool"
-        let ConverterType = typeof<BooleanConverter>
+        inherit BaseConverterTestCaseSource()
+        override __.Key = "Bool"
+        override __.ConverterType = typeof<BooleanConverter>
         
-        interface IEnumerable with
-            member __.GetEnumerator() = __.GetEnumerable().GetEnumerator() :> IEnumerator
-        
-        member private __.GetEnumerable() = 
+        override __.GetEnumerable() = 
             seq { 
-                yield new UniversalConverterTestCase<bool, byte []>(true, [| 0xFFuy |], Key, ConverterType)
-                yield new UniversalConverterTestCase<bool, byte []>(false, [| 0x00uy |], Key, ConverterType)
-            }
+                yield new UniversalConverterTestCase<bool, byte []>(true, [| 0xFFuy |], __.Key, __.ConverterType)
+                yield new UniversalConverterTestCase<bool, byte []>(false, [| 0x00uy |], __.Key, __.ConverterType)
+            } :> _
     end
