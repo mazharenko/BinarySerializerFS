@@ -1,15 +1,15 @@
-namespace BinarySerializerFS.UnitTests.ConverterTests.CaseSources
+namespace BinarySerializerFS.UnitTests.BinarizerTests.CaseSources
 
-open BinarySerializerFS.Converters
-open BinarySerializerFS.UnitTests.ConverterTests.Cases
+open BinarySerializerFS.Binarizers
+open BinarySerializerFS.UnitTests.BinarizerTests.Cases
 open System
 open System.Collections
 
 [<AbstractClass>]
-type BaseConverterTestCaseSource() = 
+type BaseBinarizerTestCaseSource() = 
     class
         abstract Key : string
-        abstract ConverterType : Type
+        abstract BinarizerType : Type
         abstract GetEnumerable : unit -> IEnumerable
         interface IEnumerable with
             member __.GetEnumerator() = __.GetEnumerable().GetEnumerator()

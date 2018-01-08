@@ -1,30 +1,30 @@
-namespace BinarySerializerFS.UnitTests.ConverterTests.CaseSources
+namespace BinarySerializerFS.UnitTests.BinarizerTests.CaseSources
 
-open BinarySerializerFS.Converters
-open BinarySerializerFS.UnitTests.ConverterTests.Cases
+open BinarySerializerFS.Binarizers
+open BinarySerializerFS.UnitTests.BinarizerTests.Cases
 open NUnit.Framework
 open System
 open System.Collections
 
-type StringConverterTestCaseSource() = 
+type StringBinarizerTestCaseSource() = 
     class
-        inherit BaseConverterTestCaseSource()
+        inherit BaseBinarizerTestCaseSource()
         override __.Key = "String"
-        override __.ConverterType = typeof<StringConverter>
+        override __.BinarizerType = typeof<StringBinarizer>
         
         override __.GetEnumerable() = 
             seq<obj> { 
-                yield new UniversalConverterTestCase<string, byte []>(String.Empty, [| 0x00uy |], __.Key, 
-                                                                      __.ConverterType) :> _
-                yield new UniversalConverterTestCase<string, byte []>("Foo © bar 𝌆 baz ☃ qux", 
+                yield new UniversalBinarizerTestCase<string, byte []>(String.Empty, [| 0x00uy |], __.Key, 
+                                                                      __.BinarizerType) :> _
+                yield new UniversalBinarizerTestCase<string, byte []>("Foo © bar 𝌆 baz ☃ qux", 
                                                                       [| 0x46uy; 0x6Fuy; 0x6Fuy; 0x20uy; 0xC2uy; 0xA9uy; 
                                                                          0x20uy; 0x62uy; 0x61uy; 0x72uy; 0x20uy; 0xF0uy; 
                                                                          0x9Duy; 0x8Cuy; 0x86uy; 0x20uy; 0x62uy; 0x61uy; 
                                                                          0x7Auy; 0x20uy; 0xE2uy; 0x98uy; 0x83uy; 0x20uy; 
                                                                          0x71uy; 0x75uy; 0x78uy; 0x00uy |], __.Key, 
-                                                                      __.ConverterType) :> _
-                yield new TestCaseData(__.GetIHaveADreamExcerpt(), __.GetIHaveADreamBytes(), __.ConverterType, 
-                                       TestName = "TestStringConverter(I have a dream)") :> _
+                                                                      __.BinarizerType) :> _
+                yield new TestCaseData(__.GetIHaveADreamExcerpt(), __.GetIHaveADreamBytes(), __.BinarizerType, 
+                                       TestName = "TestStringBinarizer(I have a dream)") :> _
             } :> _
         
         member private __.GetIHaveADreamExcerpt() = 

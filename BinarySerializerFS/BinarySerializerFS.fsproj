@@ -6,9 +6,10 @@
   <ItemGroup>
     <Compile Include="Exceptions\StreamReadExceptions.fs" />
     <Compile Include="Constants.fs" />
-    <Compile Include="Converters\Base\Converter.fs" />
-    <Compile Include="Converters\BooleanConverter.fs" />
-    <Compile Include="Converters\StringConverter.fs" />
+    <Compile Include="Transformers\Base\ITransformer.fs" />
+    <Compile Include="Transformers\Base\Binarizer.fs" />
+    <Compile Include="Transformers\Binarizers\BooleanBinarizer.fs" />
+    <Compile Include="Transformers\Binarizers\StringBinarizer.fs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />

@@ -1,12 +1,12 @@
-namespace BinarySerializerFS.Converters
+namespace BinarySerializerFS.Binarizers
 
-open BinarySerializerFS.Converters.Base
+open BinarySerializerFS.Transformers.Base
 open System
 open System.Text
 
-type StringConverter() = 
+type StringBinarizer() = 
     class
-        inherit Converter<string>()
+        inherit Binarizer<string>()
         
         override __.WriteInternal source stream = 
             let sourceUntilZeroBytes = 

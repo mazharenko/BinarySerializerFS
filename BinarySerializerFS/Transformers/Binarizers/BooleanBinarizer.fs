@@ -1,10 +1,10 @@
-namespace BinarySerializerFS.Converters
+namespace BinarySerializerFS.Binarizers
 
-open BinarySerializerFS.Converters.Base
+open BinarySerializerFS.Transformers.Base
 
-type BooleanConverter() = 
+type BooleanBinarizer() = 
     class
-        inherit Converter<bool>()
+        inherit Binarizer<bool>()
         
         override __.WriteInternal source stream = 
             stream.WriteByte(match source with

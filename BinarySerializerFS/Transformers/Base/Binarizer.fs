@@ -1,28 +1,23 @@
-namespace BinarySerializerFS.Converters.Base
+namespace BinarySerializerFS.Transformers.Base
 
 open BinarySerializerFS.Exceptions
 open System
 open System.IO
 
-type public IConverterBase = 
+type public IBinarizer = 
     interface
-        abstract Type : Type
-    end
-
-type public IConverter = 
-    interface
-        inherit IConverterBase
+        inherit ITransformer
         abstract Write : obj -> Stream -> unit
         abstract Read : Stream -> obj option
     end
 
 [<AbstractClass>]
-type public Converter<'T>() = 
+type public Binarizer<'T>() = 
     class
         abstract WriteInternal : 'T -> Stream -> unit
         abstract ReadInternal : Stream -> 'T
         
-        interface IConverter with
+        interface IBinarizer with
             member __.Type = typeof<'T>
             
             member __.Write source stream = 
