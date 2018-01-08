@@ -1,6 +1,7 @@
 namespace BinarySerializerFS.Converters
 
 open BinarySerializerFS.Converters.Base
+open System
 open System.Text
 
 type StringConverter() = 
@@ -12,7 +13,7 @@ type StringConverter() =
                 source
                 |> Seq.takeWhile (fun c -> c <> char 0)
                 |> Seq.toArray
-                |> string
+                |> String
                 |> Encoding.UTF8.GetBytes
             stream.Write(sourceUntilZeroBytes, 0, sourceUntilZeroBytes.Length)
             stream.WriteByte 0x00uy
