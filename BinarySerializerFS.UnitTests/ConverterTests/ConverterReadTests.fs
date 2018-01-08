@@ -1,4 +1,4 @@
-module BinarySerializer.UnitTests.ConverterTests
+module BinarySerializer.UnitTests.ConverterTests.ConverterReadTests
 
 open BinarySerializerFS.Converters.Base
 open BinarySerializerFS.UnitTests.ConverterTests.CaseSources

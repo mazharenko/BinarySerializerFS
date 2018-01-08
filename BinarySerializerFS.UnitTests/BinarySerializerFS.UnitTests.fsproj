@@ -9,6 +9,7 @@
     <Compile Include="ConverterTests\CaseSources\BooleanConverterTestCaseSource.fs" />
     <Compile Include="ConverterTests\CaseSources\StringConverterTestCaseSource.fs" />
     <Compile Include="ConverterTests\ConverterReadTests.fs" />
+    <Compile Include="ConverterTests\ConverterWriteTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BinarySerializerFS\BinarySerializerFS.fsproj" />
