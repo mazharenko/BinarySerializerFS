@@ -3,6 +3,7 @@ namespace BinarySerializerFS.Transformers.Base
 open BinarySerializerFS.Exceptions
 open System
 open System.IO
+open transformUtils
 
 type public IBinarizer = 
     interface
@@ -21,10 +22,10 @@ type public Binarizer<'T>() =
             member __.Type = typeof<'T>
             
             member __.Write source stream = 
-                match source with
-                | null -> nullArg "source"
-                | :? 'T as sourceTyped -> __.WriteInternal sourceTyped stream
-                | _ -> invalidArg "source" (sprintf "Object of type %O was expected" typeof<'T>)
+                let writeToStream = __.WriteInternal >< stream
+                source
+                |> wrap writeToStream
+                |> ignore
             
             member __.Read stream = 
                 try 
