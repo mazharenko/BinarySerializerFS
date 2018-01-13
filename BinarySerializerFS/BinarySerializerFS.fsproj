@@ -11,6 +11,7 @@
     <Compile Include="Transformers\Base\ITransformer.fs" />
     <Compile Include="Transformers\Base\Converter.fs" />
     <Compile Include="Transformers\Base\Binarizer.fs" />
+    <Compile Include="Transformers\Converters\TimeSpanConverter.fs" />
     <Compile Include="Transformers\Binarizers\BooleanBinarizer.fs" />
     <Compile Include="Transformers\Binarizers\StringBinarizer.fs" />
   </ItemGroup>

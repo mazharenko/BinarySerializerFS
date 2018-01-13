@@ -12,7 +12,7 @@ type public IConverter =
     end
 
 [<AbstractClass>]
-type public Converter<'T, 'TTarget> = 
+type public ConverterBase<'T, 'TTarget>() = 
     class
         abstract ConvertToInternal : 'T -> 'TTarget
         abstract ConvertFromInternal : 'TTarget -> 'T
