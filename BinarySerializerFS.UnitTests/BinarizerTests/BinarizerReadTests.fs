@@ -6,13 +6,14 @@ open FsUnit
 open NUnit.Framework
 open System
 open System.IO
+open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
 
 let TestBinarizerRead (expected : obj) (source : byte []) (binarizer : IBinarizer) = 
     use stream = 
         (source, Array.zeroCreate 10)
         ||> Array.append
         |> MemoryStream
-    stream
+    readFromStream stream
         |> binarizer.Read
         |> should equal (Some expected)
     stream.Position

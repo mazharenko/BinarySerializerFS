@@ -1,5 +1,6 @@
 namespace BinarySerializerFS.Transformers.Base
 
+open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
 open System.IO
 
 type BackedBinarizer(converter : IConverter, actualBinarizer : IBinarizer) = 
@@ -10,10 +11,13 @@ type BackedBinarizer(converter : IConverter, actualBinarizer : IBinarizer) =
         
         interface IBinarizer with
             member __.Type = actualBinarizer.Type
-            member __.Write (source : obj) (stream : Stream) = 
-                actualBinarizer.Write (converter.ConvertTo source) stream
-            member __.Read(stream : Stream) = 
-                match actualBinarizer.Read stream with
+            
+            member __.Write (source : obj) (writeAdapter : writeBytesAdapter) = 
+                let writeToStream = actualBinarizer.Write >< writeAdapter
+                source |> (converter.ConvertTo >> writeToStream)
+            
+            member __.Read(readAdapter : readBytesAdapter) = 
+                match actualBinarizer.Read readAdapter with
                 | Some value -> Some <| converter.ConvertFrom value
                 | None -> None
     end

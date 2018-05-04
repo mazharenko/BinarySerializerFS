@@ -2,6 +2,7 @@ module BinarySerializer.UnitTests.BinarizerTests.BinarizerWriteTests
 
 open BinarySerializerFS.Transformers.Base
 open BinarySerializerFS.UnitTests.BinarizerTests.CaseSources
+open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
 open FsUnit
 open NUnit.Framework
 open System
@@ -9,7 +10,7 @@ open System.IO
 
 let TestBinarizerWrite (source : obj) (expected : byte []) (binarizer : IBinarizer) = 
     use stream = new MemoryStream()
-    binarizer.Write source stream
+    binarizer.Write source (writeBytesToStream stream)
     should equal expected (stream.ToArray())
     
 [<Test>]

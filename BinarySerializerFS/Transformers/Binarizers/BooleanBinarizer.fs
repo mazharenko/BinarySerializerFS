@@ -6,14 +6,14 @@ type BooleanBinarizer() =
     class
         inherit Binarizer<bool>()
         
-        override __.WriteInternal source stream = 
-            stream.WriteByte(match source with
-                             | true -> 0xFF
-                             | false -> 0x00
-                             |> byte)
+        override __.WriteInternal source writeAdapter = 
+            match source with
+            | true -> 0xFFuy
+            | false -> 0x00uy
+            |> Array.singleton
+            |> writeAdapter
         
-        override __.ReadInternal stream = 
-            let onlyByte = __.ReadBytesInternal stream 1 |> Array.exactlyOne
+        override __.ReadInternal readAdapter = 
+            let onlyByte = readAdapter 1 |> Array.exactlyOne
             onlyByte > 0uy
     end
-    
