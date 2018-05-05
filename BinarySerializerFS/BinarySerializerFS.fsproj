@@ -14,14 +14,12 @@
     <Compile Include="Transformers\Base\Binarizer.fs" />
     <Compile Include="Transformers\Base\BackedBinarizer.fs" />
     <Compile Include="Transformers\Converters\TimeSpanConverter.fs" />
+    <Compile Include="Transformers\Binarizers\Integer\intUtils.fs" />
     <Compile Include="Transformers\Binarizers\BooleanBinarizer.fs" />
     <Compile Include="Transformers\Binarizers\StringBinarizer.fs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="paket.references" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Transformers\Base\BackedBinarizer.fs" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
