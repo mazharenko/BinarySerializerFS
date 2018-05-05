@@ -4,4 +4,5 @@ exception StreamEndReachedException
 
 exception UnexpectedStreamEndException of string
 
-let UnexpectedStreamEndException = fun () -> UnexpectedStreamEndException "Unexpected end of stream has been detected"
+let UnexpectedStreamEndException() = 
+    UnexpectedStreamEndException "Unexpected end of stream has been detected"
