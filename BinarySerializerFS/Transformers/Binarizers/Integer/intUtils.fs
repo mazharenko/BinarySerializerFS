@@ -61,7 +61,7 @@ let private bin block =
             else 0uy) + byte length &&& annotationLengthMask |]
     | ComplexValue bytes -> bytes
 
-let private (|StructureBlock|) firstByte = 
+let private (|ServiceStructureBlock|) firstByte = 
     match firstByte &&& simpleBinMarker with
     | 0uy -> 
         firstByte &&& simpleBinValueMask
@@ -79,7 +79,7 @@ let Write (writeAdapter : writeBytesAdapter) (source : uint64) negative =
 let Read(readAdapter : readBytesAdapter) = 
     let firstByte = readAdapter 1 |> Array.exactlyOne
     match firstByte with
-    | StructureBlock block -> 
+    | ServiceStructureBlock block -> 
         match block with
         | SimpleComplete number -> (number, false)
         | ComplexAnnotation(negative, length) -> 
