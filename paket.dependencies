@@ -3,3 +3,7 @@ framework: netcoreapp2.0
 storage: none
 
 nuget FSharp.Core ~> 4.2.3
+nuget FsUnit
+nuget NUnit
+nuget NUnit3TestAdapter
+nuget Microsoft.NET.Test.Sdk 
