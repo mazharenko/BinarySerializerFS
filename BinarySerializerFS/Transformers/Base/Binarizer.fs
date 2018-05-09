@@ -9,20 +9,20 @@ open transformUtils
 type public IBinarizer = 
     interface
         inherit ITransformer
-        abstract Write : obj -> writeBytesAdapter -> unit
+        abstract Write : writeBytesAdapter ->  obj -> unit
         abstract Read : readBytesAdapter -> obj option
     end
 
 [<AbstractClass>]
 type public Binarizer<'T>() = 
     class
-        abstract WriteInternal : 'T -> writeBytesAdapter -> unit
+        abstract WriteInternal : writeBytesAdapter -> 'T -> unit
         abstract ReadInternal : readBytesAdapter -> 'T
         interface IBinarizer with
             member __.Type = typeof<'T>
             
-            member __.Write source writeBytesAdapter = 
-                let writeToStream = __.WriteInternal >< writeBytesAdapter
+            member __.Write writeBytesAdapter source = 
+                let writeToStream = __.WriteInternal writeBytesAdapter
                 source
                 |> wrap writeToStream
                 |> ignore

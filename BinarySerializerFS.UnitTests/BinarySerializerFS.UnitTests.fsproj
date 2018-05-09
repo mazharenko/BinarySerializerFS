@@ -4,10 +4,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BinarizerTests\Cases\IntegerTestCase.fs" />
     <Compile Include="BinarizerTests\Cases\UniversalBinarizerTestCase.fs" />
     <Compile Include="BinarizerTests\CaseSources\BaseBinarizerTestCaseSource.fs" />
     <Compile Include="BinarizerTests\CaseSources\BooleanBinarizerTestCaseSource.fs" />
     <Compile Include="BinarizerTests\CaseSources\StringBinarizerTestCaseSource.fs" />
+    <Compile Include="BinarizerTests\CaseSources\IntegerTestCaseSource.fs" />
     <Compile Include="BinarizerTests\binarizerTestsUtils.fs" />
     <Compile Include="BinarizerTests\intUtilsTests.fs" />
     <Compile Include="BinarizerTests\BinarizerReadTests.fs" />

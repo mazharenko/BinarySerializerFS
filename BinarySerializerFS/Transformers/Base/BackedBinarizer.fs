@@ -12,8 +12,8 @@ type BackedBinarizer(converter : IConverter, actualBinarizer : IBinarizer) =
         interface IBinarizer with
             member __.Type = actualBinarizer.Type
             
-            member __.Write (source : obj) (writeAdapter : writeBytesAdapter) = 
-                let writeToStream = actualBinarizer.Write >< writeAdapter
+            member __.Write  (writeAdapter : writeBytesAdapter) (source : obj)= 
+                let writeToStream = actualBinarizer.Write writeAdapter
                 source |> (converter.ConvertTo >> writeToStream)
             
             member __.Read(readAdapter : readBytesAdapter) = 

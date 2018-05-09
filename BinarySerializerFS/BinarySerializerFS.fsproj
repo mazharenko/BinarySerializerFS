@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssembyInfo.fs" />
     <Compile Include="utils.fs" />
     <Compile Include="Exceptions\StreamReadExceptions.fs" />
     <Compile Include="Constants.fs" />
@@ -14,7 +15,7 @@
     <Compile Include="Transformers\Base\Binarizer.fs" />
     <Compile Include="Transformers\Base\BackedBinarizer.fs" />
     <Compile Include="Transformers\Converters\TimeSpanConverter.fs" />
-    <Compile Include="Transformers\Binarizers\Integer\intUtils.fs" />
+    <Compile Include="Transformers\Binarizers\Integer\intBinUitls.fs" />
     <Compile Include="Transformers\Binarizers\BooleanBinarizer.fs" />
     <Compile Include="Transformers\Binarizers\StringBinarizer.fs" />
   </ItemGroup>

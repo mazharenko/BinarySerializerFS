@@ -8,7 +8,7 @@ type StringBinarizer() =
     class
         inherit Binarizer<string>()
         
-        override __.WriteInternal source writeAdapter = 
+        override __.WriteInternal writeAdapter source = 
             source
             |> Seq.takeWhile (fun c -> c <> char 0)
             |> Seq.toArray

@@ -6,7 +6,7 @@ type BooleanBinarizer() =
     class
         inherit Binarizer<bool>()
         
-        override __.WriteInternal source writeAdapter = 
+        override __.WriteInternal writeAdapter source = 
             match source with
             | true -> 0xFFuy
             | false -> 0x00uy

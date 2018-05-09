@@ -70,13 +70,13 @@ let private (|ServiceStructureBlock|) firstByte =
     | _ -> 
         ComplexAnnotation(firstByte &&& annotationNegativeBinMarker <> 0uy, firstByte &&& annotationLengthMask |> int)
 
-let GetBytes = GetStructure >>+ ((Seq.collect bin) >> Seq.toArray)
+let GetBytesForInteger = GetStructure >>+ ((Seq.collect bin) >> Seq.toArray)
 
-let Write (writeAdapter : writeBytesAdapter) (source : uint64) negative = 
-    let bytes = GetBytes source negative
+let WriteInteger (writeAdapter : writeBytesAdapter) (source : uint64) negative = 
+    let bytes = GetBytesForInteger source negative
     writeAdapter bytes
 
-let Read(readAdapter : readBytesAdapter) = 
+let ReadInteger(readAdapter : readBytesAdapter) = 
     let firstByte = readAdapter 1 |> Array.exactlyOne
     match firstByte with
     | ServiceStructureBlock block -> 
