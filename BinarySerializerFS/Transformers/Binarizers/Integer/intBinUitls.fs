@@ -64,11 +64,10 @@ let private bin block =
 let private (|ServiceStructureBlock|) firstByte = 
     match firstByte &&& simpleBinMarker with
     | 0uy -> 
-        firstByte &&& simpleBinValueMask
-        |> uint64
-        |> SimpleComplete
-    | _ -> 
-        ComplexAnnotation(firstByte &&& annotationNegativeBinMarker <> 0uy, firstByte &&& annotationLengthMask |> int)
+        ComplexAnnotation(firstByte &&& annotationNegativeBinMarker <> 0uy, firstByte &&& annotationLengthMask |> int)        
+    | _ -> firstByte &&& simpleBinValueMask
+                   |> uint64
+                   |> SimpleComplete
 
 let GetBytesForInteger = GetStructure >>+ ((Seq.collect bin) >> Seq.toArray)
 
