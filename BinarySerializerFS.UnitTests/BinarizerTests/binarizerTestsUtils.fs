@@ -15,7 +15,9 @@ let TestRead (read : readBytesAdapter -> obj option) (expected : obj) (source : 
     |> should equal (Some expected)
     stream.Position |> should equal source.Length
 
+// TODO: change the parameters' order
 let TestWrite (write : writeBytesAdapter -> obj -> unit) (source : obj) (expected : byte []) = 
     use stream = new MemoryStream()
     write (writeBytesToStream stream) source
     should equal expected (stream.ToArray())
+
