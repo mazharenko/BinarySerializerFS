@@ -15,4 +15,4 @@ let TestBinarizerWrite(binarizer : IBinarizer) = TestWrite binarizer.Write
 [<TestCaseSource(typeof<BooleanBinarizerTestCaseSource>)>]
 [<TestCaseSource(typeof<StringBinarizerTestCaseSource>)>]
 let TestBinarizersWrite (source : obj) (expected : byte []) (binarizerType : Type) = 
-    (source, expected) ||> (Activator.CreateInstance binarizerType :?> IBinarizer |> TestBinarizerWrite)
+    (expected, source) ||> (Activator.CreateInstance binarizerType :?> IBinarizer |> TestBinarizerWrite)

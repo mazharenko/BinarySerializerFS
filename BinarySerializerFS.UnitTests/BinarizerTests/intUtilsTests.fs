@@ -13,7 +13,7 @@ open System.IO
 module IntegerWriteTests = 
     let TestIntWrite number negative expectedBytes = 
         let unifiedWrite adapter (source : obj) = source :?> uint64 * bool ||> WriteInteger adapter
-        TestWrite unifiedWrite (number, negative) expectedBytes
+        TestWrite unifiedWrite expectedBytes (number, negative)
     
     [<Test>]
     [<TestCaseSource(typeof<IntegerTestCaseSource>)>]
