@@ -58,7 +58,7 @@ let private bin block =
     | Service(SimpleComplete number) -> [| simpleBinMarker + (byte number &&& simpleBinValueMask) |]
     | Service(ComplexAnnotation(negative, length)) -> 
         [| (if negative then annotationNegativeBinMarker
-            else 0uy) + byte length &&& annotationLengthMask |]
+            else 0uy) + (byte length &&& annotationLengthMask) |]
     | ComplexValue bytes -> bytes
 
 let private (|ServiceStructureBlock|) firstByte = 
