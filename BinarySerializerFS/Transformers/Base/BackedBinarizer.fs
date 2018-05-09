@@ -1,6 +1,6 @@
 namespace BinarySerializerFS.Transformers.Base
 
-open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
+open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions
 open System.IO
 
 type BackedBinarizer(converter : IConverter, actualBinarizer : IBinarizer) = 

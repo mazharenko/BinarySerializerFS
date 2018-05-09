@@ -1,6 +1,6 @@
 module internal BinarySerializerFS.Binarizers.Integer.intBinUitls
 
-open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
+open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions
 open System.IO
 
 let rec private numberToBytes number = 

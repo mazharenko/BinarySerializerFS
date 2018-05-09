@@ -1,21 +1,18 @@
 module BinarySerializer.UnitTests.BinarizerTests.BinarizerWriteTests
 
+open BinarySerializer.UnitTests.BinarizerTests.binarizerTestsUtils
 open BinarySerializerFS.Transformers.Base
+open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions.StreamAdapterFunctions
 open BinarySerializerFS.UnitTests.BinarizerTests.CaseSources
-open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
 open FsUnit
 open NUnit.Framework
 open System
 open System.IO
 
-let TestBinarizerWrite (source : obj) (expected : byte []) (binarizer : IBinarizer) = 
-    use stream = new MemoryStream()
-    binarizer.Write source (writeBytesToStream stream)
-    should equal expected (stream.ToArray())
-    
+let TestBinarizerWrite(binarizer : IBinarizer) = TestWrite binarizer.Write
+
 [<Test>]
 [<TestCaseSource(typeof<BooleanBinarizerTestCaseSource>)>]
 [<TestCaseSource(typeof<StringBinarizerTestCaseSource>)>]
-let TestBinarizersWrite (source : obj) (expected : byte []) (binarizerType : Type)=
-    Activator.CreateInstance binarizerType :?> IBinarizer
-    |> TestBinarizerWrite source expected
+let TestBinarizersWrite (source : obj) (expected : byte []) (binarizerType : Type) = 
+    (source, expected) ||> (Activator.CreateInstance binarizerType :?> IBinarizer |> TestBinarizerWrite)

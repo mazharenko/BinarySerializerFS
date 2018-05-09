@@ -1,7 +1,7 @@
 namespace BinarySerializerFS.Transformers.Base
 
 open BinarySerializerFS.Exceptions
-open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
+open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions
 open System
 open System.IO
 open transformUtils

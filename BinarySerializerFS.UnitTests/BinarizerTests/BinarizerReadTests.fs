@@ -6,23 +6,15 @@ open FsUnit
 open NUnit.Framework
 open System
 open System.IO
-open BinarySerializerFS.Transformers.Base.StreamAdapterFunctions
+open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions.StreamAdapterFunctions
+open BinarySerializer.UnitTests.BinarizerTests.binarizerTestsUtils
 
-let TestBinarizerRead (expected : obj) (source : byte []) (binarizer : IBinarizer) = 
-    use stream = 
-        (source, Array.zeroCreate 10)
-        ||> Array.append
-        |> MemoryStream
-    readFromStream stream
-        |> binarizer.Read
-        |> should equal (Some expected)
-    stream.Position
-        |> should equal source.Length
-
+let TestBinarizerRead (binarizer : IBinarizer) = TestRead binarizer.Read
+    
 [<Test>]
 [<TestCaseSource(typeof<BooleanBinarizerTestCaseSource>)>]
 [<TestCaseSource(typeof<StringBinarizerTestCaseSource>)>]
 let TestBinarizersRead (expected : obj) (source : byte []) (``type`` : Type) = 
     let binarizer = Activator.CreateInstance ``type`` :?> IBinarizer
-    TestBinarizerRead expected source binarizer
+    TestBinarizerRead binarizer expected source
     
