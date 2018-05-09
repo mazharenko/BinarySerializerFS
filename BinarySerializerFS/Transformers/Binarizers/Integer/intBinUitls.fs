@@ -3,15 +3,20 @@ module internal BinarySerializerFS.Binarizers.Integer.intBinUitls
 open BinarySerializerFS.Transformers.Base.BytesAdapterFunctions
 open System.IO
 
-let rec private numberToBytes number = 
-    seq { 
-        let smaller = number &&& 0xFFUL |> byte
-        let shifted = number >>> 8
-        match shifted with
-        | 0UL -> ()
-        | _ -> yield! numberToBytes shifted
-        yield smaller
-    }
+let private numberToBytes number =
+    let rec numberToBytesCompr number =  
+        seq { 
+            let smaller = number &&& 0xFFUL |> byte
+            let shifted = number >>> 8
+            match shifted with
+            | 0UL -> ()
+            | _ -> yield! numberToBytesCompr shifted
+            yield smaller
+        }
+    match number with 
+    | 0UL -> Seq.empty
+    | _ -> numberToBytesCompr number
+    
 
 let private bytesToNumber = 
     let accumulate acc byte = acc <<< 8 ||| (uint64 byte)
