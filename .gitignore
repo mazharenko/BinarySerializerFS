@@ -218,3 +218,5 @@ _Pvt_Extensions
 
 .idea/
 paket.restore.cached
+paket-files
+paket.exe

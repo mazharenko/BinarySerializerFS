@@ -4,7 +4,16 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\paket-files\mazharenko\GenericParserLibrary\GenericParserLibrary\ParserLibrary.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/ParserLibrary.fs</Link>
+    </Compile>
+    <Compile Include="..\paket-files\mazharenko\GenericParserLibrary\ParserLibrary.Bin\Bin.fs">
+      <Paket>True</Paket>
+      <Link>paket-files/Bin.fs</Link>
+    </Compile>
     <Compile Include="AssembyInfo.fs" />
+    <Compile Include="combinators.fs" />
     <Compile Include="utils.fs" />
     <Compile Include="Exceptions\StreamReadExceptions.fs" />
     <Compile Include="Constants.fs" />

@@ -694,3 +694,7 @@ NUGET
       System.Xml.ReaderWriter (>= 4.3)
       System.Xml.XmlDocument (>= 4.3)
       System.Xml.XPath (>= 4.3)
+GITHUB
+  remote: mazharenko/GenericParserLibrary
+    GenericParserLibrary/ParserLibrary.fs (0bbfd8d1c019ff69a924fbe52ebd70ab4d4922b6)
+    ParserLibrary.Bin/Bin.fs (0bbfd8d1c019ff69a924fbe52ebd70ab4d4922b6)

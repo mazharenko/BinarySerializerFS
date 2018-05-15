@@ -7,3 +7,6 @@ nuget FsUnit
 nuget NUnit
 nuget NUnit3TestAdapter
 nuget Microsoft.NET.Test.Sdk 
+
+github mazharenko/GenericParserLibrary GenericParserLibrary/ParserLibrary.fs
+github mazharenko/GenericParserLibrary ParserLibrary.Bin/Bin.fs
