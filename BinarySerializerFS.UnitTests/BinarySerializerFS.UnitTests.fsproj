@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="paket-files" />
     <Compile Include="BinarizerTests\Cases\IntegerTestCase.fs" />
     <Compile Include="BinarizerTests\Cases\UniversalBinarizerTestCase.fs" />
     <Compile Include="BinarizerTests\CaseSources\BaseBinarizerTestCaseSource.fs" />

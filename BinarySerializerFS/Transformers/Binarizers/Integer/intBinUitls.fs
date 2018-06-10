@@ -18,10 +18,6 @@ let private numberToBytes number =
     | _ -> numberToBytesCompr number
     
 
-let private bytesToNumber = 
-    let accumulate acc byte = acc <<< 8 ||| (uint64 byte)
-    Array.fold accumulate 0UL
-
 // if non-negative and 7 bits are enough
 // 1
 // 7 bits - value
@@ -66,27 +62,49 @@ let private bin block =
             else 0uy) + (byte length &&& annotationLengthMask) |]
     | ComplexValue bytes -> bytes
 
-let private (|ServiceStructureBlock|) firstByte = 
-    match firstByte &&& simpleBinMarker with
-    | 0uy -> 
-        ComplexAnnotation(firstByte &&& annotationNegativeBinMarker <> 0uy, firstByte &&& annotationLengthMask |> int)        
-    | _ -> firstByte &&& simpleBinValueMask
-                   |> uint64
-                   |> SimpleComplete
-
 let GetBytesForInteger = GetStructure >>+ ((Seq.collect bin) >> Seq.toArray)
 
 let WriteInteger (writeAdapter : writeBytesAdapter) (source : uint64) negative = 
     let bytes = GetBytesForInteger source negative
     writeAdapter bytes
 
-let ReadInteger(readAdapter : readBytesAdapter) = 
-    let firstByte = readAdapter 1 |> Array.exactlyOne
-    match firstByte with
-    | ServiceStructureBlock block -> 
-        match block with
-        | SimpleComplete number -> (number, false)
+
+open Combinators
+open ParserLibrary.Generic
+open ParserLibrary.Bin
+
+let private bytesToNumber (b : byte list) = 
+    let accumulate acc byte = acc <<< 8 ||| (uint64 byte)
+    List.fold accumulate 0UL b
+
+let private parseComplexAnnotation complexAnnotationByte =
+    ComplexAnnotation(
+        complexAnnotationByte &&& annotationNegativeBinMarker <> 0uy,
+        complexAnnotationByte &&& annotationLengthMask |> int
+    )
+
+let ReadParser = 
+    let simpleCompleteParser = 
+        let predicate b = b &&& simpleBinMarker <> 0uy
+        let extractValue b = b &&& simpleBinValueMask
+        readByte
+        <?> predicate
+        |>> (extractValue >> uint64 >> SimpleComplete)
+        <//> "simple integer"
+    let complexAnnotationParser =
+        let predicate b = b &&& simpleBinMarker = 0uy
+        readByte
+        <?> predicate
+        >>= (parseComplexAnnotation >> returnP)
+        <//> "complex integer annotation"
+    simpleCompleteParser <|> complexAnnotationParser
+    >>= (
+        function 
+        | SimpleComplete number -> returnP (false, number)
         | ComplexAnnotation(negative, length) -> 
-            (length
-             |> readAdapter
-             |> bytesToNumber, negative)
+            readByte
+            |> List.replicate length
+            |> sequence
+            |>> bytesToNumber
+            |>> (fun num -> (negative, num))
+    )

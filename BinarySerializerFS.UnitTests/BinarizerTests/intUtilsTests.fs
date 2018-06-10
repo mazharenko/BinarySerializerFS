@@ -9,6 +9,7 @@ open FsUnit
 open NUnit.Framework
 open System
 open System.IO
+open ParserLibrary.Bin
 
 module IntegerWriteTests = 
     let TestIntWrite number negative expectedBytes = 
@@ -21,7 +22,7 @@ module IntegerWriteTests =
 
 module IntegerReadTests = 
     let TestIntRead number negative bytes = 
-        TestRead (ReadInteger >> fun res -> res :> obj |> Some) (number, negative) bytes
+        TestParser ReadParser (negative, number) bytes
     
     [<Test>]
     [<TestCaseSource(typeof<IntegerTestCaseSource>)>]
