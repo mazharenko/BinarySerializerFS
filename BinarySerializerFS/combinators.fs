@@ -26,7 +26,7 @@ let bnumber =
     <//> "number"
 
 let bmembero marker valueparser = 
-    (pbyte marker) |>> UnpackByte .>>. valueparser <//> sprintf "%i: %s" marker valueparser.label
+    (pbyte marker) .>>. valueparser <//> sprintf "%i: %s" marker valueparser.label
 let bobjectroot = pbyte 1uy <//> "object root"
 let bobjectend = pbyte 0uy <//> "object end"
 let bobjectsample (memberParsers : Parser<byte * BModel> list) = 
