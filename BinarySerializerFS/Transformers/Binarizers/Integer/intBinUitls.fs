@@ -84,18 +84,18 @@ let private parseComplexAnnotation complexAnnotationByte =
     )
 
 let ReadParser = 
+    let simplePredicate b = b &&& simpleBinMarker <> 0uy
     let simpleCompleteParser = 
-        let predicate b = b &&& simpleBinMarker <> 0uy
         let extractValue b = b &&& simpleBinValueMask
         readByte
-        <?> predicate
+        <?> simplePredicate
         |>> (extractValue >> uint64 >> SimpleComplete)
         <//> "simple integer"
     let complexAnnotationParser =
         let predicate b = b &&& simpleBinMarker = 0uy
         readByte
-        <?> predicate
-        >>= (parseComplexAnnotation >> returnP)
+        <?> (simplePredicate >> not)
+        |>> parseComplexAnnotation
         <//> "complex integer annotation"
     simpleCompleteParser <|> complexAnnotationParser
     >>= (
